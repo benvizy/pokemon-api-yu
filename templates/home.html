@@ -1,0 +1,59 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}Pokemon Comparisons{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="static/css/styles.css">
+{% endblock %}
+
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p style="color: #ff0000"> {{message}} </p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<form action="{{ url_for('home')}}" method="post">
+  <input name='pokemon' class="form-control" type="text" placeholder="Enter Pokemon Here">
+    <br>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<table class="table">
+  <thead>
+  <tr style= "color: {{ titles.color }};">
+    <th scope="col">{{ titles.name }}</th>
+    <th scope="col">{{ titles.hp }}</th>
+    <th scope="col">{{ titles.attack }}</th>
+    <th scope="col">{{ titles.defense }}</th>
+    <th scope="col">{{ titles.spat }}</th>
+    <th scope="col">{{ titles.spdf }}</th>
+    <th scope="col">{{ titles.speed }}</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  {% for pokemon in pokelist %}
+    <tr style= "color: {{ pokemon.color }};">
+      <th scope="row">{{pokemon.name}}</th>
+      <td>{{pokemon.hp}}</td>
+      <td>{{pokemon.attack}}</td>
+      <td>{{pokemon.defense}}</td>
+      <td>{{pokemon.spat}}</td>
+      <td>{{pokemon.spdf}}</td>
+      <td>{{pokemon.speed}}</td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+
+{% endblock %}
+
+
